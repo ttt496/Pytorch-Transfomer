@@ -1,5 +1,8 @@
-forked from LiamMaclean216/Pytorch-Transfomer
+forked from LiamMaclean216/Pytorch-Transfomer（https://github.com/LiamMaclean216/Pytorch-Transfomer）
 
+Transformer model　による時系列データ予測 model
+
+9/22
 多次元の出力に対応
 
 Resources:  
