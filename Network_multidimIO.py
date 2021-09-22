@@ -4,7 +4,6 @@ import torch.nn.functional as F
 import numpy as np
 from utils import *
 
-
 class EncoderLayer(torch.nn.Module):
     def __init__(self, dim_val, dim_attn, n_heads = 1):
         super(EncoderLayer, self).__init__()
@@ -50,9 +49,12 @@ class DecoderLayer(torch.nn.Module):
 
 class Transformer_multidimOut(torch.nn.Module):
     def __init__(self, dim_val, dim_attn, input_size, output_size, dec_seq_len, out_seq_len, n_decoder_layers = 1, n_encoder_layers = 1, n_heads = 1):
-        super(Transformer, self).__init__()
+        #super(nn.Transformer, self).__init__()
+        super(Transformer_multidimOut, self).__init__()
+        #super(Transformer_multidimOut, self).__init__()
         self.dec_seq_len = dec_seq_len
-        
+        self.out_seq_len = out_seq_len
+        self.output_size = output_size
         #Initiate encoder and Decoder layers
         self.encs = nn.ModuleList()
         for i in range(n_encoder_layers):
@@ -67,10 +69,13 @@ class Transformer_multidimOut(torch.nn.Module):
         #Dense layers for managing network inputs and outputs
         self.enc_input_fc = nn.Linear(input_size, dim_val)
         self.dec_input_fc = nn.Linear(input_size, dim_val)
+
+        ###########output fc ##############
         #self.out_fc = nn.Linear(dec_seq_len * dim_val, out_seq_len)
         self.out_fc = nn.Linear(dec_seq_len * dim_val, out_seq_len * output_size)
+
     
-    def forward(self, x):
+    def forward(self, x): 
         #encoder
         e = self.encs[0](self.pos(self.enc_input_fc(x)))
         for enc in self.encs[1:]:
@@ -82,7 +87,7 @@ class Transformer_multidimOut(torch.nn.Module):
             d = dec(d, e)
             
         #output
-        #x = self.out_fc(d.flatten(start_dim=1))
-        x = self.torch.reshape( out_fc(d.flatten(start_dim=1)) , (out_seq_len,  output_size) )
+        x = self.out_fc(d.flatten(start_dim=1))
+        x = torch.reshape( x , (x.size()[0] ,  self.out_seq_len,  self.output_size) )
         
         return x
