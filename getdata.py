@@ -55,10 +55,11 @@ def get_data_custom_multidimIO(X_data, y_data, batch_size, in_seq_len, out_seq_l
 
     else: 
         for start_point in start_point_list:
-            #########ここのスライシングで(batch_size, enc_seq_len, input_size)にする#####
+
             X.append(X_data[ : , start_point : start_point + in_seq_len])
             y.append(y_data[ : , start_point + in_seq_len : start_point + seq_len])
-
+     
+    ###ここでshapeをX(batch_size , enc_seq_len, n_x_features), y(batch_size , output_sequence_length,  n_y_features)にする###
     X = torch.reshape(torch.tensor(X).float(), (batch_size , enc_seq_len, n_x_features))
     y = torch.reshape(torch.tensor(y).float(), (batch_size , output_sequence_length,  n_y_features))
     return X, y 
