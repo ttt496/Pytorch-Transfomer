@@ -48,6 +48,12 @@ class DecoderLayer(torch.nn.Module):
         return x
 
 class Transformer_multidimOut(torch.nn.Module):
+    #input_size: インプットデータ(X)の特徴量の数
+    #output_size: アウトプットデータ(Y)の特徴量の数
+    #dec_seq_len: Decoder inputのsequnceの長さ
+    #out_seq_len: アウトプットsequenceの長さ
+    #dim_val
+    #dim_attn
     def __init__(self, dim_val, dim_attn, input_size, output_size, dec_seq_len, out_seq_len, n_decoder_layers = 1, n_encoder_layers = 1, n_heads = 1):
         #super(nn.Transformer, self).__init__()
         super(Transformer_multidimOut, self).__init__()
