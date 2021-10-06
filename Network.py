@@ -85,7 +85,7 @@ class Transformer(torch.nn.Module):
         
         return x
     
-    class Transformer_multiIO_infer(torch.nn.Module):
+class Transformer_multiIO_infer(torch.nn.Module):
     def __init__(self, dim_val, dim_attn, n_X_features, n_Y_features, dec_seq_len, out_seq_len, n_decoder_layers = 1, n_encoder_layers = 1, n_heads = 1):
         super(Transformer_multiIO_infer, self).__init__()
         self.dec_seq_len = dec_seq_len
