@@ -352,7 +352,7 @@ class Alter_Dataset_multidimOut_from_dict(Dataset):
             y_data = data_dict[n][ axis_number_y_start : axis_number_y_end , :] 
             time_len = len(x_data[0,:])
             y_mean_data = np.array( [ [np.mean(y_data[i, : ])] * time_len for i in range(len(y_data[:,0])) ] ) 
-            print("n",n,x_data,"\nx_data",x_data,"\ny_data",y_data,"\ny_mean",y_mean_data)
+            print("n",n,"\n x_data",x_data,"\n y_data",y_data,"\n y_mean",y_mean_data)
             if i==0:
                 x, y, y_mean = getdata_multiIO_infer_revise_w_Ymean(x_data, y_data , y_mean_data, in_seq_len, out_seq_len)
             else:
